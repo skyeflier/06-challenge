@@ -7,6 +7,8 @@ var wind = document.querySelector('.wind');
 var windCurrent = document.querySelector('#wind-current');
 var cityInput = document.querySelector('.city-input'); //getElementbyClassName returns an array
 
+var cityNameHistoryArray = [];
+
 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 var apiKey = "47a5adb4b320deb886afffad5e515b45";

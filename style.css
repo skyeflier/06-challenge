@@ -16,6 +16,7 @@ body {
 }
 
 .forecast {
+    background-color: goldenrod;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
@@ -31,22 +32,10 @@ body {
 
 }
 
-#day-one {
+.day {
     background-color: teal;
-}
-
-#day-two {
-    background-color: goldenrod;
-}
-
-#day-three {
-    background-color: teal;
-}
-
-#day-four {
-    background-color: goldenrod;
-}
-
-#day-five {
-    background-color: teal;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
