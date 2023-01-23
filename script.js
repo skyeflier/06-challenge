@@ -7,6 +7,8 @@ var wind = document.querySelector('.wind');
 var windCurrent = document.querySelector('#wind-current');
 var cityInput = document.querySelector('.city-input'); //getElementbyClassName returns an array
 
+var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
 var apiKey = "47a5adb4b320deb886afffad5e515b45";
 
 // User story: page loads, type in city name, click search, grab a city value, use that value to perform the API call, pull the current & forecasted weather from the API, and store search history
@@ -25,8 +27,8 @@ function cityData(cityInfo) { // cityData is a function that is calling the open
         .then((response) => response.json()) // This translates the original data to readable data in JSON format
         .then((data) => { // This now allows you to work with the data from openWeather
             console.log(data)
-            currentWeather(data[0].lat, data[0].lon);
-        }); // Where lat and long exists
+            currentWeather(data[0].lat, data[0].lon); // This is where lat and long exists
+        });
 }
 
 function currentWeather(lat, lon) {
@@ -48,13 +50,14 @@ function displayData(weatherInfo) {
     console.log(weatherInfo);
 }
 
-function weatherForecast() {
+// function weatherForecast() {
 
+//     // loop through images http://openweathermap.org/img/wn/
+// }
 
-    // loop through images http://openweathermap.org/img/wn/
-}
-
-function saveData(data) {
+function searchHistory() {
+    var recentSearch = []
+    recentSearch.push
     var cityInput = data.name
     var cityName = localStorage.getItem("cityInput")
     document.querySelector('cityInput').value = cityName;
