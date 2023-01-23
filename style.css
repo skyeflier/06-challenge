@@ -1,0 +1,42 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 16px;
+}
+
+.city-input {
+    border-color: goldenrod;
+    border-width: 5px;
+}
+
+#search-button {
+    background-color: goldenrod;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: white;
+}
+
+.forecast {}
+
+.current-weather {
+    background-color: rosybrown;
+}
+
+#day-one {
+    background-color: teal;
+}
+
+#day-two {
+    background-color: goldenrod;
+}
+
+#day-three {
+    background-color: teal;
+}
+
+#day-four {
+    background-color: goldenrod;
+}
+
+#day-five {
+    background-color: teal;
+}
