@@ -5,7 +5,7 @@ body {
 
 .city-input {
     border-color: goldenrod;
-    border-width: 5px;
+    border-width: 2px;
 }
 
 #search-button {
@@ -15,10 +15,20 @@ body {
     color: white;
 }
 
-.forecast {}
+.forecast {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
 
 .current-weather {
     background-color: rosybrown;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
 }
 
 #day-one {

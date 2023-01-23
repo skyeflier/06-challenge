@@ -17,7 +17,6 @@ searchButton.addEventListener('click', function () { // When the user types in a
     cityData(cityValue); // Calling the city Data function WHY CAN WE NOT USE CITYINPUT? WHY DO WE NEED TO CREATE A NEW VALUE
 });
 
-
 function cityData(cityInfo) { // cityData is a function that is calling the openweather API and pulling in City information. 
     // console.log(cityInfo)
     var geoApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInfo + "&appid=" + apiKey //This is how to connect a variable to a string 
@@ -42,11 +41,24 @@ function currentWeather(lat, lon) {
 }
 
 function displayData(weatherInfo) {
-    tempCurrent.innerHTML = weatherInfo.main.temp
-    humidityCurrent.innerHTML = weatherInfo.main.humidity
-    windCurrent.innerHTML = weatherInfo.wind.speed
+    tempCurrent.innerHTML = weatherInfo.main.temp + " " + "°F"
+    humidityCurrent.innerHTML = weatherInfo.main.humidity + "%"
+    windCurrent.innerHTML = weatherInfo.wind.speed + " " + "mph"
+    localStorage.setItem("cityInput", weatherInfo);
     console.log(weatherInfo);
-    // NEXT pull in all the weather info
+}
+
+function weatherForecast() {
+
+
+    // loop through images http://openweathermap.org/img/wn/
+}
+
+function saveData(data) {
+    var cityInput = data.name
+    var cityName = localStorage.getItem("cityInput")
+    document.querySelector('cityInput').value = cityName;
+
 }
 
 // TO DO - CREATE A FUNCTION FOR THE FORECAST DAYS
