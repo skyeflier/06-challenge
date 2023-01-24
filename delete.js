@@ -1,3 +1,7 @@
+var cityNameHistoryArray = [];
+
+
+
 // ok this first part is just how to set local storage so that you have a list of citys
 
 // right now your code just replaces the old city in local storage with the new one
@@ -25,3 +29,20 @@ localStorage.setItem('cityName', cityNameHistoryArray);
 
 
 // -----------------------------------------------------------
+
+
+cityNameHistoryArray = localStorage.getItem('cityName');
+
+if (cityNameHistoryArray) {
+    // Json parse cityNameHistoryArray
+
+    for (var i = 0; i < cityNameHistoryArray.length; i++) {
+        // create button element
+        // use .textcontent to add text from cityNameHistoryArray[i] to button
+        // append button to already existing element in the html
+    }
+}
+
+// This will get the date then if it exist go into a for loop that will create the correct number of buttons
+
+// Let me know if you have any questions about the sudo code

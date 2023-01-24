@@ -22,7 +22,7 @@ searchButton.addEventListener('click', function () { // When the user types in a
 });
 
 function cityData(cityInfo) { // cityData is a function that is calling the openweather API and pulling in City information. 
-    // console.log(cityInfo)
+    console.log(cityInfo)
     var geoApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInfo + "&appid=" + apiKey //This is how to connect a variable to a string 
     // console.log(geoApi);
     fetch(geoApi)
@@ -52,9 +52,21 @@ function displayData(weatherInfo) {
     console.log(weatherInfo);
 }
 
+function searchHistory() {
+    cityNameHistoryArray = localStorage.getItem('cityName');
+
+    if (cityNameHistoryArray) {
+        const topScores = JSON.parse(localStorage.getItem("cityName"))
+        var scheduleTime = parseInt(this.dataset.cityNameHistoryArray) // json parse cityNameHistoryArray
+        var savedCities = cityNameHistoryArray.push(this) // then .push new city name into array
+    } else {
+        cityNameHistoryArray = [cityName]; // this is if there is nothing in local storage. we cant push to the array if it does not exist. So we redefine it with the new city name inside.
+    }
+}
+
 // function weatherForecast() {
 
-//     // loop through images http://openweathermap.org/img/wn/
+// loop through images http://openweathermap.org/img/wn/
 // }
 
 function searchHistory() {
@@ -63,7 +75,6 @@ function searchHistory() {
     var cityInput = data.name
     var cityName = localStorage.getItem("cityInput")
     document.querySelector('cityInput').value = cityName;
-
 }
 
 // TO DO - CREATE A FUNCTION FOR THE FORECAST DAYS
