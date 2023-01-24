@@ -67,6 +67,8 @@ function searchHistory() {
     // console.log(JSON.stringify(savedCities));
 }
 
+// I can say that you can push the users input or search into the array and save it in the array. Then a forloop can be used to loop through it and create the buttons and list that shows on the screen
+
 JSON.stringify(cityNameHistoryArray) // json stringify cityNameHistoryArray
 
 localStorage.setItem('cityName', cityNameHistoryArray);
