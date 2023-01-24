@@ -1,4 +1,4 @@
-var city = document.querySelector('.city-name');
+var cityName = document.querySelector('.city-name');
 var temp = document.querySelector('.temperature');
 var tempCurrent = document.querySelector('#temperature-current')
 var humidity = document.querySelector('.humidity');
@@ -45,7 +45,7 @@ function currentWeather(lat, lon) {
 }
 
 function displayData(weatherInfo) {
-    tempCurrent.innerHTML = weatherInfo.main.temp + " " + "°F"
+    tempCurrent.innerHTML = weatherInfo.main.temp + "°F"
     humidityCurrent.innerHTML = weatherInfo.main.humidity + "%"
     windCurrent.innerHTML = weatherInfo.wind.speed + " " + "mph"
     localStorage.setItem("cityInput", weatherInfo);
@@ -54,28 +54,46 @@ function displayData(weatherInfo) {
 
 function searchHistory() {
     cityNameHistoryArray = localStorage.getItem('cityName');
-
     if (cityNameHistoryArray) {
-        const topScores = JSON.parse(localStorage.getItem("cityName"))
-        var scheduleTime = parseInt(this.dataset.cityNameHistoryArray) // json parse cityNameHistoryArray
+        var storedCities = parseInt(this.dataset.cityNameHistoryArray) // json parse cityNameHistoryArray
         var savedCities = cityNameHistoryArray.push(this) // then .push new city name into array
     } else {
         cityNameHistoryArray = [cityName]; // this is if there is nothing in local storage. we cant push to the array if it does not exist. So we redefine it with the new city name inside.
     }
+    // var cities = localStorage.getItem(cityNameHistoryArray);
+    // cityNameHistoryArray.value
+
+    // console.log(JSON.stringify(storedCities));
+    // console.log(JSON.stringify(savedCities));
 }
+
+JSON.stringify(cityNameHistoryArray) // json stringify cityNameHistoryArray
+
+localStorage.setItem('cityName', cityNameHistoryArray);
+
+if (cityNameHistoryArray) {
+    // Json parse cityNameHistoryArray
+
+    for (var i = 0; i < cityNameHistoryArray.length; i++) {
+        // create button element
+        // use .textcontent to add text from cityNameHistoryArray[i] to button
+        // append button to already existing element in the html
+    }
+}
+
 
 // function weatherForecast() {
 
 // loop through images http://openweathermap.org/img/wn/
 // }
 
-function searchHistory() {
-    var recentSearch = []
-    recentSearch.push
-    var cityInput = data.name
-    var cityName = localStorage.getItem("cityInput")
-    document.querySelector('cityInput').value = cityName;
-}
+// function searchHistory() {
+//     var recentSearch = []
+//     recentSearch.push
+//     var cityInput = data.name
+//     var cityName = localStorage.getItem("cityInput")
+//     document.querySelector('cityInput').value = cityName;
+// }
 
 // TO DO - CREATE A FUNCTION FOR THE FORECAST DAYS
 // TO DO - store data in the local
