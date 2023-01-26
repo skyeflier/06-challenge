@@ -68,7 +68,6 @@ function displayData(weatherInfo) {
     humidityCurrent.innerHTML = weatherInfo.main.humidity + "%"
     windCurrent.innerHTML = weatherInfo.wind.speed + " " + "mph"
 
-
     // cityNameHistoryArray.push(city)
     // localStorage.setItem("cities", JSON.stringify(cityNameHistoryArray));
     // console.log(weatherInfo);
@@ -77,26 +76,26 @@ function displayData(weatherInfo) {
 function onLoad() {
     if (cityNameHistoryArray !== 0) { // if it's not an empty array in storage then loop through what we have and display
         for (let i = 0; i < cityNameHistoryArray.length; i++) {
-            let liEl = document.createElement("li");
-            let historyButton = document.createElement("button");
-            // historyButton.setAttribute('type', 'button'); // Type defines what type of content to display in the browser
-            // historyButton.setAttribute('id', 'history-button'); // id styles the id
-            // historyButton.setAttribute('data-value', cityNameHistoryArray[i]);
-            // historyButton.addEventListener('click', function (e) {
-            //     if (e.target.dataset.value === cityNameHistoryArray[i]) {
-            //         cityData(cityNameHistoryArray[i]);
-            //         cityInput.value = cityNameHistoryArray[i];
-            //     }
-            // });
-            historyButton.textContent = cityNameHistoryArray[i]; //The text content of this button
-            liEl.appendChild(historyButton);
-            historyContainerElement.appendChild(liEl);
+            let liEl = document.createElement("li")
+            let historyButton = document.createElement("button")
+            historyButton.setAttribute('type', 'button'); // Type defines what type of content to display in the browser
+            historyButton.setAttribute('id', 'history-button'); // id styles the id
+            historyButton.setAttribute('data-value', cityNameHistoryArray[i]);
+            historyButton.addEventListener('click', function (e) {
+                if (e.target.dataset.value === cityNameHistoryArray[i]) {
+                    cityData(cityNameHistoryArray[i]);
+                    cityInput.value = cityNameHistoryArray[i];
+                }
+            });
+            historyButton.textContent = cityNameHistoryArray[i] //The text content of this button
+            liEl.appendChild(historyButton)
+            historyContainerElement.appendChild(liEl)
         }
     }
 }
 
 function saveSearch(cityValue) { //when we load, we'll grab everything in storage 
-    // var city = cityInput.value
+    var city = cityInput.value
     // var city = cityValue.trim()
     cityNameHistoryArray.push(city);
     localStorage.setItem("cities", JSON.stringify(cityNameHistoryArray));
