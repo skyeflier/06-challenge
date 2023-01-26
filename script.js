@@ -60,7 +60,7 @@ function displayData(weatherInfo) {
     var city = cityInput.value
     let cityNameEl = document.querySelector("#city-name");
     let imageEl = document.createElement('img')
-    imageEl.src = '`https://openweathermap.org/img/w/${weather.weather[0].icon}@2x.png`'
+    imageEl.src = `https://openweathermap.org/img/w/${weatherInfo.weather[0].icon}@2x.png`
     currentWeatherIcon.appendChild(imageEl)
 
     cityNameEl.innerHTML = city.toUpperCase();
