@@ -16,8 +16,6 @@ var historyContainerElement = document.querySelector('#search-history-container'
 
 var cityNameHistoryArray = JSON.parse(localStorage.getItem("cities")) || [] // Setting a default - Check to see if there is something in local storage, if there is nothing in local storage, then set this variable to an empty array
 
-var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-
 var apiKey = "47a5adb4b320deb886afffad5e515b45";
 
 // User story: page loads, type in city name, click search, grab a city value, use that value to perform the API call, pull the current & forecasted weather from the API, and store search history
@@ -26,7 +24,7 @@ const searchButton = document.querySelector('#search-button') // Needs to be in 
 searchButton.addEventListener('click', function () { // When the user types in a city and clicks 'search', cityData function is called to call the weather data they are requesting. 
     var cityValue = cityInput.value; // The value property sets or returns the value of the value attribute of a text field. In this case, the user input of a city name. 
     cityData(cityValue); // Calling the city Data function WHY CAN WE NOT USE CITYINPUT? WHY DO WE NEED TO CREATE A NEW VALUE
-    saveSearch();
+    saveSearch(cityValue);
 });
 
 function cityData(cityInfo) { // cityData is a function that is calling the openweather API and pulling in City information. 
@@ -81,15 +79,15 @@ function onLoad() {
         for (let i = 0; i < cityNameHistoryArray.length; i++) {
             let liEl = document.createElement("li");
             let historyButton = document.createElement("button");
-            historyButton.setAttribute('type', 'button'); // Type defines what type of content to display in the browser
-            historyButton.setAttribute('id', 'history-button'); // id styles the id
-            historyButton.setAttribute('data-value', cityNameHistoryArray[i]);
-            historyButton.addEventListener('click', function (e) {
-                if (e.target.dataset.value === cityNameHistoryArray[i]) {
-                    cityData(cityNameHistoryArray[i]);
-                    cityInput.value = cityNameHistoryArray[i];
-                }
-            });
+            // historyButton.setAttribute('type', 'button'); // Type defines what type of content to display in the browser
+            // historyButton.setAttribute('id', 'history-button'); // id styles the id
+            // historyButton.setAttribute('data-value', cityNameHistoryArray[i]);
+            // historyButton.addEventListener('click', function (e) {
+            //     if (e.target.dataset.value === cityNameHistoryArray[i]) {
+            //         cityData(cityNameHistoryArray[i]);
+            //         cityInput.value = cityNameHistoryArray[i];
+            //     }
+            // });
             historyButton.textContent = cityNameHistoryArray[i]; //The text content of this button
             liEl.appendChild(historyButton);
             historyContainerElement.appendChild(liEl);
@@ -97,18 +95,19 @@ function onLoad() {
     }
 }
 
-function saveSearch() { //when we load, we'll grab everything in storage 
-    var city = cityInput.value
+function saveSearch(cityValue) { //when we load, we'll grab everything in storage 
+    // var city = cityInput.value
+    // var city = cityValue.trim()
     cityNameHistoryArray.push(city);
     localStorage.setItem("cities", JSON.stringify(cityNameHistoryArray));
 }
 
-// function initSearchHistory() {
-//     var storedHistory = localStorage.getItem('search-history');
-//     if (storedHistory) {
-//         searchHistory = JSON.parse(storedHistory);
-//     }
-//     renderSearchHistory();
+// function searchHistory() {
+//     //     var storedHistory = localStorage.getItem('search-history');
+//     //     if (storedHistory) {
+//     //         searchHistory = JSON.parse(storedHistory);
+//     //     }
+//     //     renderSearchHistory();
 // }
 
 // when looping thorugh that array of cities, attach an event listener to each buttons and pass in a value (the text content of those buttons)
