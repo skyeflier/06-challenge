@@ -1,6 +1,7 @@
 var cityName = document.querySelector('.city-name');
 var dateCurrent = document.querySelector('.date-current');
 
+var currentWeatherIcon = document.querySelector('.current-weather-icon');
 var iconCurrentEL = document.createElement('iconCurrent');
 var tempCurrent = document.querySelector('#temperature-current');
 var humidityCurrent = document.querySelector('#humidity-current');
@@ -25,6 +26,7 @@ searchButton.addEventListener('click', function () { // When the user types in a
     var cityValue = cityInput.value; // The value property sets or returns the value of the value attribute of a text field. In this case, the user input of a city name. 
     cityData(cityValue); // Calling the city Data function WHY CAN WE NOT USE CITYINPUT? WHY DO WE NEED TO CREATE A NEW VALUE
     saveSearch(cityValue);
+    onLoad(cityValue);
 });
 
 function cityData(cityInfo) { // cityData is a function that is calling the openweather API and pulling in City information. 
@@ -57,6 +59,10 @@ function currentWeather(lat, lon) {
 function displayData(weatherInfo) {
     var city = cityInput.value
     let cityNameEl = document.querySelector("#city-name");
+    let imageEl = document.createElement('img')
+    imageEl.src = '`https://openweathermap.org/img/w/${weather.weather[0].icon}@2x.png`'
+    currentWeatherIcon.appendChild(imageEl)
+
     cityNameEl.innerHTML = city.toUpperCase();
     // <img src="http://openweathermap.org/img/wn/" ${
     //     weatherInfo.weather[0].icon
@@ -74,6 +80,7 @@ function displayData(weatherInfo) {
 }
 
 function onLoad() {
+    historyContainerElement.innerHTML = ""
     if (cityNameHistoryArray !== 0) { // if it's not an empty array in storage then loop through what we have and display
         for (let i = 0; i < cityNameHistoryArray.length; i++) {
             let liEl = document.createElement("li")
