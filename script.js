@@ -43,7 +43,7 @@ function cityData(cityInfo) { // cityData is a function that is calling the open
 
 function currentWeather(lat, lon) {
     var geoApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial"
-    iconCurrentEL.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+    // iconCurrentEL.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
     fetch(geoApi)
         .then((response) => response.json())
         .then((data) => {
@@ -54,7 +54,7 @@ function currentWeather(lat, lon) {
     // .then((data) => console.log(data.list));
 }
 
-http://openweathermap.org/img/wn/weather.icon.@2x.png
+// http://openweathermap.org/img/wn/weather.icon.@2x.png
 
 function displayData(weatherInfo) {
     var city = cityInput.value
@@ -79,29 +79,52 @@ function displayData(weatherInfo) {
 function onLoad() {
     if (cityNameHistoryArray !== 0) { // if it's not an empty array in storage then loop through what we have and display
         for (let i = 0; i < cityNameHistoryArray.length; i++) {
-            let liEl = document.createElement("li")
-            let historyButton = document.createElement("button")
-            historyButton.textContent = cityNameHistoryArray[i] //The text content of this button
-            liEl.appendChild(historyButton)
-            historyContainerElement.appendChild(liEl)
+            let liEl = document.createElement("li");
+            let historyButton = document.createElement("button");
+            historyButton.setAttribute('type', 'button'); // Type defines what type of content to display in the browser
+            historyButton.setAttribute('id', 'history-button'); // id styles the id
+            historyButton.setAttribute('data-value', cityNameHistoryArray[i]);
+            historyButton.addEventListener('click', function (e) {
+                if (e.target.dataset.value === cityNameHistoryArray[i]) {
+                    cityData(cityNameHistoryArray[i]);
+                    cityInput.value = cityNameHistoryArray[i];
+                }
+            });
+            historyButton.textContent = cityNameHistoryArray[i]; //The text content of this button
+            liEl.appendChild(historyButton);
+            historyContainerElement.appendChild(liEl);
         }
     }
 }
 
 function saveSearch() { //when we load, we'll grab everything in storage 
     var city = cityInput.value
-    cityNameHistoryArray.push(city)
+    cityNameHistoryArray.push(city);
     localStorage.setItem("cities", JSON.stringify(cityNameHistoryArray));
 }
+
+// function initSearchHistory() {
+//     var storedHistory = localStorage.getItem('search-history');
+//     if (storedHistory) {
+//         searchHistory = JSON.parse(storedHistory);
+//     }
+//     renderSearchHistory();
+// }
 
 // when looping thorugh that array of cities, attach an event listener to each buttons and pass in a value (the text content of those buttons)
 // call function city data and pass in that current search value 
 
 // loop through images http://openweathermap.org/img/wn/
 
+// ---------------------
 
-function searchHistory() {
-}
+// function renderForecast(dailyForecast) {
+
+//     var startDt = dayjs().add(1, 'day').startOf('day').unix();
+//     var endDt = dayjs().add(6, 'day').startOf('day').unix();
+
+//     function searchHistory() {
+//     }
 
 
 // JSON.stringify(cityNameHistoryArray) // json stringify cityNameHistoryArray
@@ -121,3 +144,5 @@ function searchHistory() {
 // function weatherForecast() {
 
 onLoad()
+
+// -------
