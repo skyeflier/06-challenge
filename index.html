@@ -17,14 +17,11 @@
         crossorigin="anonymous"></script>
     <div>
         <div>
-            <!-- USING ASIDE TO GET SEARCH HISTORY TO THE LEFT SIDE -->
-            <aside>
-                <input class="city-input" id="search" placeholder="Start typing a city...">
-                <!--  onchange="saveSearch()", openPage() -->
-                <button id="search-button">Search</button>
-                <div class="hide" id="search-history">Search History</div>
-                <ul id="search-history-container"></ul>
-            </aside>
+            <input class="city-input" id="search" placeholder="Start typing a city...">
+            <button id="search-button">Search</button>
+            <div class="hide" id="search-history">Search History</div>
+            <ul id="search-history-container"></ul>
+
         </div>
         <div class="current-weather-container text-center">
             <div class="current-weather">
@@ -33,7 +30,7 @@
                     <span id="date-current"></span>
                 </h3>
                 <h3 class="current-weather-icon">
-                    <span id="icon-current"></span>
+                    <img id="icon-current">
                 </h3>
                 <h3 class="temperature">Temperature:
                     <span id="temperature-current"></span>
@@ -49,21 +46,95 @@
             <div class="forecast-container text-center">
                 <h2 class="forecast">Five Day Forecast</h2>
                 <div class="row align-items-start">
-                    <h2>5 Day</h2>
-                    <div class="col day" id="one-day">
-                        Tomorrow
+
+                    <div class="col day" id="day-one">
+                        <h3 class="date-forecast">Date:
+                            <span id="date-day-one"></span>
+                        </h3>
+                        <h3 class="weather-icon-forecast">
+                            <span id="icon-day-one"></span>
+                        </h3>
+                        <h3 class="temperature-forecast">Temperature:
+                            <span id="temperature-day-one"></span>
+                        </h3>
+                        <h3 class="humidity-forecast">Humidity:
+                            <span id="humidity-day-one"></span>
+                        </h3>
+                        <h3 class="wind-forecast">Wind Speed:
+                            <span id="wind-day-one"></span>
+                        </h3>
                     </div>
-                    <div class="col day" id="two-day">
-                        2 Day
+
+                    <div class="col day" id="day-two">
+                        <h3 class="date-forecast">Date:
+                            <span id="date-day-two"></span>
+                        </h3>
+                        <h3 class="weather-icon-forecast">
+                            <span id="icon-day-two"></span>
+                        </h3>
+                        <h3 class="temperature-forecast">Temperature:
+                            <span id="temperature-day-two"></span>
+                        </h3>
+                        <h3 class="humidity-forecast">Humidity:
+                            <span id="humidity-day-two"></span>
+                        </h3>
+                        <h3 class="wind-forecast">Wind Speed:
+                            <span id="wind-day-two"></span>
+                        </h3>
                     </div>
-                    <div class="col day" id="three-day">
-                        3 Day
+
+                    <div class="col day" id="day-three">
+                        <h3 class="date-forecast">Date:
+                            <span id="date-day-three"></span>
+                        </h3>
+                        <h3 class="weather-icon-forecast">
+                            <span id="icon-day-three"></span>
+                        </h3>
+                        <h3 class="temperature-forecast">Temperature:
+                            <span id="temperature-day-three"></span>
+                        </h3>
+                        <h3 class="humidity-forecast">Humidity:
+                            <span id="humidity-day-three"></span>
+                        </h3>
+                        <h3 class="wind-forecast">Wind Speed:
+                            <span id="wind-day-three"></span>
+                        </h3>
                     </div>
-                    <div class="col day" id="four-day">
-                        4 Day
+
+                    <div class="col day" id="day-four">
+                        <h3 class="date-forecast">Date:
+                            <span id="date-day-four"></span>
+                        </h3>
+                        <h3 class="weather-icon-forecast">
+                            <span id="icon-day-four"></span>
+                        </h3>
+                        <h3 class="temperature-forecast">Temperature:
+                            <span id="temperature-day-four"></span>
+                        </h3>
+                        <h3 class="humidity-forecast">Humidity:
+                            <span id="humidity-day-four"></span>
+                        </h3>
+                        <h3 class="wind-forecast">Wind Speed:
+                            <span id="wind-day-four"></span>
+                        </h3>
                     </div>
-                    <div class="col day" id="five-day">
-                        5 Day
+
+                    <div class="col day" id="day-five">
+                        <h3 class="date-forecast">Date:
+                            <span id="date-day-five"></span>
+                        </h3>
+                        <h3 class="weather-icon-forecast">
+                            <span id="icon-day-five"></span>
+                        </h3>
+                        <h3 class="temperature-forecast">Temperature:
+                            <span id="temperature-day-five"></span>
+                        </h3>
+                        <h3 class="humidity-forecast">Humidity:
+                            <span id="humidity-day-five"></span>
+                        </h3>
+                        <h3 class="wind-forecast">Wind Speed:
+                            <span id="wind-day-five"></span>
+                        </h3>
                     </div>
 
                 </div>

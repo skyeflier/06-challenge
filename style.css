@@ -44,3 +44,13 @@ li {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
+
+.date-forecast {}
+
+.weather-icon-forecast {}
+
+.temperature-forecast {}
+
+.humidity-forecast {}
+
+.wind-forecast {}
