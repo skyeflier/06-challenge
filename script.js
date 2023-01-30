@@ -48,11 +48,11 @@ var iconDayFour = document.querySelector('#icon-day-four');
 var iconDayFive = document.querySelector('#icon-day-five');
 
 //Forecast Temperatures
-// var temperatureDayOne = document.querySelector('#temperature-day-one');
-// var temperatureDayOne = document.querySelector('#temperature-day-two');
-// var temperatureDayOne = document.querySelector('#temperature-day-three');
-// var temperatureDayOne = document.querySelector('#temperature-day-four');
-// var temperatureDayOne = document.querySelector('#temperature-day-five');
+var temperatureDayOne = document.querySelector('#temperature-day-one');
+var temperatureDayOne = document.querySelector('#temperature-day-two');
+var temperatureDayOne = document.querySelector('#temperature-day-three');
+var temperatureDayOne = document.querySelector('#temperature-day-four');
+var temperatureDayOne = document.querySelector('#temperature-day-five');
 
 //Forecast Humidity
 var humidityDayOne = document.querySelector('#humidity-day-one');
@@ -105,31 +105,32 @@ function currentWeather(lat, lon) {
 }
 
 function forecastWeather(data) { //This variable here is called a parameter
-    console.log(data)
+    console.log(data) //This is checking to see what information is being pulled from 'data'
     var forecastInfo = data.list; //5,13,21,29,37
+
+    // var humidityEl = document.getElementById('humidity-day-${day}');
+    // var windEl = document.getElementById('wind-day-${day}');
     for (let day = 5; day < forecastInfo.length; day += 8) {
         console.log(forecastInfo[day]) //Grabbing forecastInfo (which is the array) and selecting the days, which should be every 24 hours at noon
+
+        // dayOneCard = forecastInfo[5]
+        // dayTwoCard = forecastInfo[13]
+        // dayThreeCard = forecastInfo[21]
+        // dayFourCard = forecastInfo[29]
+        // dayFiveCard = forecastInfo[37]
 
         // iconDayOne.src = `https://openweathermap.org/img/w/${forecastInfo.weather[day].icon}.png`
         // iconForecastEL.appendChild(iconDayOne)
 
-        tempForecast.innerHTML = forecastInfo[day].main.temp + "°F"
-        humidityForecast.innerHTML = forecastInfo[day].main.humidity + "% humidity"
-        windForecast.innerHTML = forecastInfo[day].wind.speed + " " + "mph wind"
+        var tempEl = document.getElementById('temperature-day-$[day}');
+        tempEl.textContent = forecastInfo[day].main.temp + "°F"
+        // humidityForecast.innerHTML = forecastInfo[day].main.humidity + "% humidity"
+        // windForecast.innerHTML = forecastInfo[day].wind.speed + " " + "mph wind"
 
-        dayOneCard = forecastInfo[5]
-        dayTwoCard = forecastInfo[13]
-        dayThreeCard = forecastInfo[21]
-        dayFourCard = forecastInfo[29]
-        dayFiveCard = forecastInfo[37]
-
-        // getElementById(`card-${day}`); INSERTING JAVASCRIPT INTO A STRING
     }
-
 }
 
-
-//displayData is a function that pulls in the 
+//This function called displayData pulls in the data from openWeather API and displays it to the web page. 
 function displayData(weatherInfo) {
     var city = cityInput.value
     let cityNameEl = document.querySelector("#city-name");
@@ -143,6 +144,7 @@ function displayData(weatherInfo) {
     windCurrent.innerHTML = weatherInfo.wind.speed + " " + "mph wind"
 }
 
+//This function loops through cities the user has searched for and displays them on the page
 function onLoad() {
     historyContainerElement.innerHTML = ""
     if (cityNameHistoryArray !== 0) { // if it's not an empty array in storage then loop through what we have and display
