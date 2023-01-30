@@ -122,7 +122,7 @@ function forecastWeather(data) { //This variable here is called a parameter
         // iconDayOne.src = `https://openweathermap.org/img/w/${forecastInfo.weather[day].icon}.png`
         // iconForecastEL.appendChild(iconDayOne)
 
-        var tempEl = document.getElementById('temperature-day-$[day}');
+        var tempEl = document.getElementById(`temperature-day-$[day}`);
         tempEl.textContent = forecastInfo[day].main.temp + "°F"
         // humidityForecast.innerHTML = forecastInfo[day].main.humidity + "% humidity"
         // windForecast.innerHTML = forecastInfo[day].wind.speed + " " + "mph wind"
