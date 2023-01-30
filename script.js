@@ -1,4 +1,9 @@
+//City input from website user
 var cityName = document.querySelector('.city-name');
+var cityInput = document.querySelector('.city-input');
+var historyContainerElement = document.querySelector('#search-history-container');
+var cityNameHistoryArray = JSON.parse(localStorage.getItem("cities")) || [] // Setting a default - Check to see if there is something in local storage, if there is nothing in local storage, then set this variable to an empty array
+var apiKey = "47a5adb4b320deb886afffad5e515b45";
 
 //Current Weather Variables
 var dateCurrent = document.querySelector('.date-current');
@@ -8,6 +13,13 @@ var tempCurrent = document.querySelector('#temperature-current');
 var humidityCurrent = document.querySelector('#humidity-current');
 var windCurrent = document.querySelector('#wind-current');
 
+//The HTML Cards for each day
+var dayOneCard = document.querySelector('.day-one');
+var dayTwoCard = document.querySelector('.day-two');
+var dayThreeCard = document.querySelector('.day-three');
+var dayFourCard = document.querySelector('.day-four');
+var dayFiveCard = document.querySelector('.day-five');
+
 //Five Day Forecast Variables
 var forecastWeatherIcon = document.querySelector('.weather-icon-forecast');
 var iconForecastEL = document.createElement('iconForecast');
@@ -15,46 +27,48 @@ var tempForecast = document.querySelector('.temperature-forecast');
 var humidityForecast = document.querySelector('.humidity-forecast');
 var windForecast = document.querySelector('.wind-forecast');
 
+//Forecast Dates
 var dateDayOne = document.querySelector('#date-day-one');
 var dateDayTwo = document.querySelector('#date-day-two');
 var dateDayThree = document.querySelector('#date-day-three');
 var dateDayFour = document.querySelector('#date-day-four');
 var dateDayFive = document.querySelector('#date-day-five');
 
+var dateDayOne = document.querySelector('#date-day-one');
+var iconDayOne = document.querySelector('#icon-day-one');
+var temperatureDayOne = document.querySelector('#temperature-day-one');
+var humidityDayOne = document.querySelector('#humidity-day-one');
+var windDayOne = document.querySelector('#wind-day-one');
+
+//Forecast Icons
 var iconDayOne = document.querySelector('#icon-day-one');
 var iconDayTwo = document.querySelector('#icon-day-two');
 var iconDayThree = document.querySelector('#icon-day-three');
 var iconDayFour = document.querySelector('#icon-day-four');
 var iconDayFive = document.querySelector('#icon-day-five');
 
-var temperatureDayOne = document.querySelector('#temperature-day-one');
-var temperatureDayOne = document.querySelector('#temperature-day-two');
-var temperatureDayOne = document.querySelector('#temperature-day-three');
-var temperatureDayOne = document.querySelector('#temperature-day-four');
-var temperatureDayOne = document.querySelector('#temperature-day-five');
+//Forecast Temperatures
+// var temperatureDayOne = document.querySelector('#temperature-day-one');
+// var temperatureDayOne = document.querySelector('#temperature-day-two');
+// var temperatureDayOne = document.querySelector('#temperature-day-three');
+// var temperatureDayOne = document.querySelector('#temperature-day-four');
+// var temperatureDayOne = document.querySelector('#temperature-day-five');
 
+//Forecast Humidity
 var humidityDayOne = document.querySelector('#humidity-day-one');
 var humidityDayTwo = document.querySelector('#humidity-day-two');
 var humidityDayThree = document.querySelector('#humidity-day-three');
 var humidityDayFour = document.querySelector('#humidity-day-four');
 var humidityDayFive = document.querySelector('#humidity-day-five');
 
+//Forecast Wind
 var windDayOne = document.querySelector('#wind-day-one');
 var windDayTwo = document.querySelector('#wind-day-two');
 var windDayThree = document.querySelector('#wind-day-three');
 var windDayFour = document.querySelector('#wind-day-four');
 var windDayFive = document.querySelector('#wind-day-five');
 
-
-
-
-var cityInput = document.querySelector('.city-input');
-var historyContainerElement = document.querySelector('#search-history-container');
-
-var cityNameHistoryArray = JSON.parse(localStorage.getItem("cities")) || [] // Setting a default - Check to see if there is something in local storage, if there is nothing in local storage, then set this variable to an empty array
-
-var apiKey = "47a5adb4b320deb886afffad5e515b45";
-
+//Variable & Function to search for weather data when the user clicks the searchButton created in CSS
 const searchButton = document.querySelector('#search-button') // Needs to be in the global scope, because the button needs to be ready when the page is loaded
 searchButton.addEventListener('click', function () { // When the user types in a city and clicks 'search', cityData function is called to call the weather data they are requesting. 
     var cityValue = cityInput.value; // The value property sets or returns the value of the value attribute of a text field. In this case, the user input of a city name. 
@@ -63,7 +77,8 @@ searchButton.addEventListener('click', function () { // When the user types in a
     onLoad(cityValue);
 });
 
-function cityData(cityInfo) { // cityData is a function that is calling the openweather API and pulling in City information. 
+//cityData is a function that is calling the openweather API and pulling in City information. 
+function cityData(cityInfo) {
     console.log(cityInfo)
     var geoApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInfo + "&appid=" + apiKey //This is how to connect a variable to a string 
     fetch(geoApi)
@@ -74,17 +89,47 @@ function cityData(cityInfo) { // cityData is a function that is calling the open
         });
 }
 
+//currentWeather is a function that is calling the openWeather API and pulling in current weather for the location searched
 function currentWeather(lat, lon) {
     var geoApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial"
     fetch(geoApi)
         .then((response) => response.json())
         .then((data) => {
-            // var info = data.list[29];
+            // console.log(data)
             var info = data.list[0];
+            //displayData(data.list[0]) This is the same as displayData(info);
+            // console.log(info)
             displayData(info);
+            forecastWeather(data); //Argument takes the place of the parameter 
         })
 }
 
+function forecastWeather(data) { //This variable here is called a parameter
+    console.log(data)
+    var forecastInfo = data.list; //5,13,21,29,37
+    for (let day = 5; day < forecastInfo.length; day += 8) {
+        console.log(forecastInfo[day]) //Grabbing forecastInfo (which is the array) and selecting the days, which should be every 24 hours at noon
+
+        // iconDayOne.src = `https://openweathermap.org/img/w/${forecastInfo.weather[day].icon}.png`
+        // iconForecastEL.appendChild(iconDayOne)
+
+        tempForecast.innerHTML = forecastInfo[day].main.temp + "°F"
+        humidityForecast.innerHTML = forecastInfo[day].main.humidity + "% humidity"
+        windForecast.innerHTML = forecastInfo[day].wind.speed + " " + "mph wind"
+
+        dayOneCard = forecastInfo[5]
+        dayTwoCard = forecastInfo[13]
+        dayThreeCard = forecastInfo[21]
+        dayFourCard = forecastInfo[29]
+        dayFiveCard = forecastInfo[37]
+
+        // getElementById(`card-${day}`); INSERTING JAVASCRIPT INTO A STRING
+    }
+
+}
+
+
+//displayData is a function that pulls in the 
 function displayData(weatherInfo) {
     var city = cityInput.value
     let cityNameEl = document.querySelector("#city-name");
@@ -93,9 +138,9 @@ function displayData(weatherInfo) {
     currentWeatherIcon.appendChild(imageEl)
     cityNameEl.innerHTML = city.toUpperCase();
     tempCurrent.innerHTML = weatherInfo.main.temp + "°F"
-    console.log(weatherInfo);
+    // console.log(weatherInfo);
     humidityCurrent.innerHTML = weatherInfo.main.humidity + "%"
-    windCurrent.innerHTML = weatherInfo.wind.speed + " " + "mph"
+    windCurrent.innerHTML = weatherInfo.wind.speed + " " + "mph wind"
 }
 
 function onLoad() {
