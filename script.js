@@ -108,24 +108,22 @@ function forecastWeather(data) { //This variable here is called a parameter
     console.log(data) //This is checking to see what information is being pulled from 'data'
     var forecastInfo = data.list; //5,13,21,29,37
 
-    // var humidityEl = document.getElementById('humidity-day-${day}');
-    // var windEl = document.getElementById('wind-day-${day}');
     for (let day = 5; day < forecastInfo.length; day += 8) {
         console.log(forecastInfo[day]) //Grabbing forecastInfo (which is the array) and selecting the days, which should be every 24 hours at noon
 
-        // dayOneCard = forecastInfo[5]
-        // dayTwoCard = forecastInfo[13]
-        // dayThreeCard = forecastInfo[21]
-        // dayFourCard = forecastInfo[29]
-        // dayFiveCard = forecastInfo[37]
+        var iconEl = document.getElementById(`icon-day-${day}`);
+        iconEl.src = `https://openweathermap.org/img/w/${data.forecastInfo[day].weather[0].icon}.png`
+        forecastWeatherIcon.appendChild(iconEl)
 
-        // iconDayOne.src = `https://openweathermap.org/img/w/${forecastInfo.weather[day].icon}.png`
-        // iconForecastEL.appendChild(iconDayOne)
+        var tempEl = document.getElementById(`temperature-day-${day}`);
+        tempEl.innerHTML = forecastInfo[day].main.temp + "°F";
 
-        var tempEl = document.getElementById(`temperature-day-$[day}`);
-        tempEl.textContent = forecastInfo[day].main.temp + "°F"
-        // humidityForecast.innerHTML = forecastInfo[day].main.humidity + "% humidity"
-        // windForecast.innerHTML = forecastInfo[day].wind.speed + " " + "mph wind"
+        var humidityForecast = document.getElementById(`humidity-day-${day}`);
+        humidityForecast.innerHTML = forecastInfo[day].main.humidity + "% humidity"
+
+        var windForecast = document.getElementById(`wind-day-${day}`);
+        windForecast.innerHTML = forecastInfo[day].wind.speed + " " + "mph"
+
 
     }
 }
@@ -141,7 +139,7 @@ function displayData(weatherInfo) {
     tempCurrent.innerHTML = weatherInfo.main.temp + "°F"
     // console.log(weatherInfo);
     humidityCurrent.innerHTML = weatherInfo.main.humidity + "%"
-    windCurrent.innerHTML = weatherInfo.wind.speed + " " + "mph wind"
+    windCurrent.innerHTML = weatherInfo.wind.speed + " " + "mph"
 }
 
 //This function loops through cities the user has searched for and displays them on the page

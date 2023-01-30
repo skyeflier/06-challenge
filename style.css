@@ -39,18 +39,9 @@ li {
 
 .day {
     background-color: teal;
+    padding: 50px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
-
-.date-forecast {}
-
-.weather-icon-forecast {}
-
-.temperature-forecast {}
-
-.humidity-forecast {}
-
-.wind-forecast {}
