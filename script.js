@@ -5,6 +5,10 @@ var historyContainerElement = document.querySelector('#search-history-container'
 var cityNameHistoryArray = JSON.parse(localStorage.getItem("cities")) || [] // Setting a default - Check to see if there is something in local storage, if there is nothing in local storage, then set this variable to an empty array
 var apiKey = "47a5adb4b320deb886afffad5e515b45";
 
+// Current date - WHEN UPDATING ADD TIME
+var today = dayjs().format('DD MMMM YYYY');
+$('#date-current').text(today);
+
 //Current Weather Variables
 var dateCurrent = document.querySelector('.date-current');
 var currentWeatherIcon = document.querySelector('.current-weather-icon');
@@ -13,62 +17,6 @@ var tempCurrent = document.querySelector('#temperature-current');
 var humidityCurrent = document.querySelector('#humidity-current');
 var windCurrent = document.querySelector('#wind-current');
 
-//The HTML Cards for each day
-var dayOneCard = document.querySelector('.day-one');
-var dayTwoCard = document.querySelector('.day-two');
-var dayThreeCard = document.querySelector('.day-three');
-var dayFourCard = document.querySelector('.day-four');
-var dayFiveCard = document.querySelector('.day-five');
-
-//Five Day Forecast Variables
-var forecastWeatherIcon = document.querySelector('.weather-icon-forecast');
-var iconForecastEL = document.createElement('iconForecast');
-var tempForecast = document.querySelector('.temperature-forecast');
-var humidityForecast = document.querySelector('.humidity-forecast');
-var windForecast = document.querySelector('.wind-forecast');
-
-//Forecast Dates
-var dateDayOne = document.querySelector('#date-day-one');
-var dateDayTwo = document.querySelector('#date-day-two');
-var dateDayThree = document.querySelector('#date-day-three');
-var dateDayFour = document.querySelector('#date-day-four');
-var dateDayFive = document.querySelector('#date-day-five');
-
-var dateDayOne = document.querySelector('#date-day-one');
-var iconDayOne = document.querySelector('#icon-day-one');
-var temperatureDayOne = document.querySelector('#temperature-day-one');
-var humidityDayOne = document.querySelector('#humidity-day-one');
-var windDayOne = document.querySelector('#wind-day-one');
-
-//Forecast Icons
-var iconDayOne = document.querySelector('#icon-day-one');
-var iconDayTwo = document.querySelector('#icon-day-two');
-var iconDayThree = document.querySelector('#icon-day-three');
-var iconDayFour = document.querySelector('#icon-day-four');
-var iconDayFive = document.querySelector('#icon-day-five');
-
-//Forecast Temperatures
-var temperatureDayOne = document.querySelector('#temperature-day-one');
-var temperatureDayOne = document.querySelector('#temperature-day-two');
-var temperatureDayOne = document.querySelector('#temperature-day-three');
-var temperatureDayOne = document.querySelector('#temperature-day-four');
-var temperatureDayOne = document.querySelector('#temperature-day-five');
-
-//Forecast Humidity
-var humidityDayOne = document.querySelector('#humidity-day-one');
-var humidityDayTwo = document.querySelector('#humidity-day-two');
-var humidityDayThree = document.querySelector('#humidity-day-three');
-var humidityDayFour = document.querySelector('#humidity-day-four');
-var humidityDayFive = document.querySelector('#humidity-day-five');
-
-//Forecast Wind
-var windDayOne = document.querySelector('#wind-day-one');
-var windDayTwo = document.querySelector('#wind-day-two');
-var windDayThree = document.querySelector('#wind-day-three');
-var windDayFour = document.querySelector('#wind-day-four');
-var windDayFive = document.querySelector('#wind-day-five');
-
-//Variable & Function to search for weather data when the user clicks the searchButton created in CSS
 const searchButton = document.querySelector('#search-button') // Needs to be in the global scope, because the button needs to be ready when the page is loaded
 searchButton.addEventListener('click', function () { // When the user types in a city and clicks 'search', cityData function is called to call the weather data they are requesting. 
     var cityValue = cityInput.value; // The value property sets or returns the value of the value attribute of a text field. In this case, the user input of a city name. 
@@ -77,9 +25,8 @@ searchButton.addEventListener('click', function () { // When the user types in a
     onLoad(cityValue);
 });
 
-//cityData is a function that is calling the openweather API and pulling in City information. 
 function cityData(cityInfo) {
-    console.log(cityInfo)
+    // console.log(cityInfo)
     var geoApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInfo + "&appid=" + apiKey //This is how to connect a variable to a string 
     fetch(geoApi)
         .then((response) => response.json()) // This translates the original data to readable data in JSON format
@@ -89,31 +36,31 @@ function cityData(cityInfo) {
         });
 }
 
-//currentWeather is a function that is calling the openWeather API and pulling in current weather for the location searched
 function currentWeather(lat, lon) {
     var geoApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial"
     fetch(geoApi)
         .then((response) => response.json())
         .then((data) => {
-            // console.log(data)
+            console.log(data)
             var info = data.list[0];
-            //displayData(data.list[0]) This is the same as displayData(info);
             // console.log(info)
             displayData(info);
-            forecastWeather(data); //Argument takes the place of the parameter 
+            forecastWeather(data); //This argument (data) takes the place of the parameter 
         })
 }
 
 function forecastWeather(data) { //This variable here is called a parameter
     console.log(data) //This is checking to see what information is being pulled from 'data'
-    var forecastInfo = data.list; //5,13,21,29,37
+    var forecastInfo = data.list; //5,13,21,29,37, these numbers are based on the arrays, which we can see with the console.log
 
     for (let day = 5; day < forecastInfo.length; day += 8) {
         console.log(forecastInfo[day]) //Grabbing forecastInfo (which is the array) and selecting the days, which should be every 24 hours at noon
 
+        var dateEl = document.getElementById(`date-day-${day}`);
+        dateEl.innerHTML = forecastInfo[day].dt_txt;
+
         var iconEl = document.getElementById(`icon-day-${day}`);
-        iconEl.src = `https://openweathermap.org/img/w/${data.forecastInfo[day].weather[0].icon}.png`
-        forecastWeatherIcon.appendChild(iconEl)
+        iconEl.src = `https://openweathermap.org/img/w/${forecastInfo[day].weather[0].icon}.png`
 
         var tempEl = document.getElementById(`temperature-day-${day}`);
         tempEl.innerHTML = forecastInfo[day].main.temp + "°F";
@@ -123,12 +70,9 @@ function forecastWeather(data) { //This variable here is called a parameter
 
         var windForecast = document.getElementById(`wind-day-${day}`);
         windForecast.innerHTML = forecastInfo[day].wind.speed + " " + "mph"
-
-
     }
 }
 
-//This function called displayData pulls in the data from openWeather API and displays it to the web page. 
 function displayData(weatherInfo) {
     var city = cityInput.value
     let cityNameEl = document.querySelector("#city-name");
@@ -142,15 +86,14 @@ function displayData(weatherInfo) {
     windCurrent.innerHTML = weatherInfo.wind.speed + " " + "mph"
 }
 
-//This function loops through cities the user has searched for and displays them on the page
 function onLoad() {
     historyContainerElement.innerHTML = ""
-    if (cityNameHistoryArray !== 0) { // if it's not an empty array in storage then loop through what we have and display
+    if (cityNameHistoryArray !== 0) { // This is saying, if it's not an empty array in storage then loop through what we have and display
         for (let i = 0; i < cityNameHistoryArray.length; i++) {
             let liEl = document.createElement("li")
             let historyButton = document.createElement("button")
             historyButton.setAttribute('type', 'button'); // Type defines what type of content to display in the browser
-            historyButton.setAttribute('id', 'history-button'); // id styles the id
+            historyButton.setAttribute('id', 'history-button');
             historyButton.setAttribute('data-value', cityNameHistoryArray[i]);
             historyButton.addEventListener('click', function (e) {
                 if (e.target.dataset.value === cityNameHistoryArray[i]) {
@@ -158,19 +101,17 @@ function onLoad() {
                     cityInput.value = cityNameHistoryArray[i];
                 }
             });
-            historyButton.textContent = cityNameHistoryArray[i] //The text content of this button
+            historyButton.textContent = cityNameHistoryArray[i] //This is adding the text content, or history city names to this button
             liEl.appendChild(historyButton)
             historyContainerElement.appendChild(liEl)
         }
     }
 }
 
-function saveSearch(cityValue) { //when we load, we'll grab everything in storage 
+function saveSearch(cityValue) {
     var city = cityInput.value
     cityNameHistoryArray.push(city);
     localStorage.setItem("cities", JSON.stringify(cityNameHistoryArray));
 }
-
-
 
 onLoad()

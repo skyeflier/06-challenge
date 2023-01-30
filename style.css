@@ -13,23 +13,30 @@ li {
 }
 
 #search-button {
-    background-color: goldenrod;
+    background-color: peru;
+    border: none;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     color: white;
 }
 
-
-.forecast {
-    background-color: goldenrod;
+#history-button {
+    flex-direction: row;
+    background-color: peru;
+    border: none;
+    padding: 7px;
+    margin: 3px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    color: white;
 }
 
 .current-weather {
     background-color: rosybrown;
+    border: goldenrod;
+    margin: 10px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
@@ -37,11 +44,33 @@ li {
 
 }
 
-.day {
-    background-color: teal;
-    padding: 50px;
+.forecast {
+    background-color: goldenrod;
+    padding: 10px;
+    margin: 10px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+}
+
+#city-name {
+    background-color: rosybrown;
+    padding: 10px;
+    margin: 10px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.day {
+    background-color: teal;
+    justify-content: space-evenly;
+    padding: 25px;
+    margin: 10px;
+    border-top-right-radius: 90px;
+    border-bottom-right-radius: 90px;
+    border-top-left-radius: 90px;
+    border-bottom-left-radius: 90px;
 }
