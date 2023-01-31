@@ -27,7 +27,7 @@ searchButton.addEventListener('click', function () { // When the user types in a
 
 function cityData(cityInfo) {
     // console.log(cityInfo)
-    var geoApi = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInfo + "&appid=" + apiKey //This is how to connect a variable to a string 
+    var geoApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInfo + "&appid=" + apiKey //This is how to connect a variable to a string 
     fetch(geoApi)
         .then((response) => response.json()) // This translates the original data to readable data in JSON format
         .then((data) => { // This now allows you to work with the data from openWeather
@@ -37,7 +37,7 @@ function cityData(cityInfo) {
 }
 
 function currentWeather(lat, lon) {
-    var geoApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial"
+    var geoApi = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial"
     fetch(geoApi)
         .then((response) => response.json())
         .then((data) => {
